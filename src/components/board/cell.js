@@ -21,6 +21,7 @@ class Cell extends Component {
     return(
         <div className={myClassName}>
             <p>{this.props.cellId}</p>
+            <p>{this.props.type}</p>
         </div>
     )
   }

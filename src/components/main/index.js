@@ -2,46 +2,18 @@ import React, { Component } from 'react';
 import Icon_Example from '../../images/icon.svg';
 
 import { connect } from 'src/store';
+import Board from 'src/components/board';
 require('./style.less');
 
 class Main extends Component {
 
   render() {
-    if(!this.props.loaded){
-      return (
+    return(
         <div>
-          <div id="sample">
-            <h1>{'Click this button to change loaded state'}</h1>
-            <button onClick={() => this.props.actions.toggleLoaded()}>{'toggle loaded'}</button>
-          </div>
-          <br/>
-          <br/>
-          <br/>
-          <div>
-            <h1>{'Image examples'}</h1>
-
-            <h2>{'image defined on image src:'}</h2>
-            <img src={require('images/giffy.gif')} />
-
-            <h2>{'image defined in style:'}</h2>
-            <div id="imageholder">
-              <div id="cssbackgroundimage" />
-            </div>
-
-            <h2>{'svg:'}</h2>
-            <Icon_Example />
-          </div>
+          <p>{"Test"}</p>
+          <Board size="large" />
         </div>
-      );
-    }else{
-      return (
-        <div id="sample" className="loaded">
-          <h1>{'LOADED'}</h1>
-          <button onClick={() => this.props.actions.toggleLoaded()}>{'toggle'}</button>
-        </div>
-      );
-    }
-
+      )
   }
 }
 

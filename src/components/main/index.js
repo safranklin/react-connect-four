@@ -10,7 +10,6 @@ class Main extends Component {
   render() {
     return(
         <div>
-          <p>{"Test"}</p>
           <Board size="large" />
         </div>
       )

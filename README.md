@@ -1,6 +1,9 @@
-Most of this boilerplate came from a tutorial by [rwieruch;](https://www.robinwieruch.de/minimal-react-webpack-babel-setup/).
+Connect Four in React!
+
+Uses a boilerplate created by [thyancey](https://github.com/thyancey/tly-react-waterfall-boilerplate/).
 
 Just a basic react setup with webpack, hotloader, babel, less compiler, and using react 6+ and react-waterfall
+
 
 ## Table of Contents
 

@@ -1,18 +1,18 @@
 import { initStore } from 'react-waterfall';
-import GridUtility from 'src/util/gridutility';
+import GameUtility from 'src/util/gameutility';
 import Coupler from 'src/util/coupler';
 
 const store = {
   initialState: {
     loaded:false,
     cells: [],
-    lastUpdated: 0,
+    lastUpdated: Date.now(),
     numRow: 0,
     numCol: 0
   },
   actions: {
     toggleLoaded: ({ loaded }) => ({ loaded: !loaded }),
-    generateCells: ({ cells, numRow, numCol, lastUpdated },row,col) => {
+    generateCells: ({ cells, numRow, numCol, lastUpdated },col,row) => {
       let arrayOfCells = [];
       const maxCells = row*col;
 
@@ -38,9 +38,9 @@ const store = {
           lastUpdated: lastUpdated
       }
     },
-    dropTokenInColumn: ({cells, lastUpdated, numRow, numCol}, colIndex) => {
+    dropTokenInColumn: ({cells, numRow, numCol}, colIndex, tokenType) => {
       // find first availble space in that column
-      let validSpace = GridUtility.findFirstEmptyCellInCol(colIndex, cells, numRow, numCol);
+      let validSpace = GameUtility.findFirstEmptyCellInCol(colIndex, cells, numRow, numCol);
 
       // can a token go in this column?
       if(validSpace === undefined){
@@ -50,17 +50,26 @@ const store = {
         return {}
       }
 
-      // 1 is player
+      // TokenType = 2 for cpu
+      // TokenType = 1 for player
+      // TokenType = 0 for none
       // set cell of first available space to blue
-      cells[validSpace] = 1;
+      cells[validSpace] = tokenType;
+ 
+      // check if player won
+      if(GameUtility.checkWin({cells, numRow, numCol}, 1)){
+        console.log("Player won!");
+      } else { // if player didn't win
+        cells = Coupler.determineNextMove(cells);
+        
+        // check for enemy win
+        if(GameUtility.checkWin({cells, numRow, numCol}, 2)){
+            console.log("CPU won!");
+        } 
+      }
 
-      // check for win
 
-        // if player didn't win
-          cells = Coupler.determineNextMove(cells);
-          // check for enemy win
-
-      lastUpdated = Date.now();
+      let lastUpdated = Date.now();
 
       return {
         cells: cells,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'src/store';
 import Cell from 'src/components/board/cell';
-import GridUtility from 'src/util/gridutility';
+import GameUtility from 'src/util/gameutility';
 require('./style.less');
 
 class Board extends Component {
@@ -16,7 +16,7 @@ class Board extends Component {
     }
 
     return (
-      <div className="board-col" key={colIndex} onClick={ () => {this.props.actions.dropTokenInColumn(colIndex)}}>
+      <div className="board-col" key={colIndex} onClick={ () => {this.props.actions.dropTokenInColumn(colIndex, 1)}} onContextMenu={ (e) => {e.preventDefault(); this.props.actions.dropTokenInColumn(colIndex, 2)}}>
         {col}
       </div>
     );
@@ -28,7 +28,7 @@ class Board extends Component {
 
     for(let i = 0; i < this.props.numCol; i++) {
 
-      let indicies = GridUtility.getIndiciesInCol(i, this.props.numCol, this.props.numRow);
+      let indicies = GameUtility.getIndiciesInCol(i, this.props.numCol, this.props.numRow);
 
       renderArray.push(this.renderCol(indicies,i));
 
@@ -38,13 +38,23 @@ class Board extends Component {
 
   }
 
+  componentDidMount() {
+    // render grid
+    // TODO: fix this later
+    global.setTimeout(()=>{this.props.actions.generateCells(7,6)},1);
+    console.log("Board loaded!");
+  }
+
   render() {
     return(
-        <div>
-          <p>{"Board"}</p>
+        <div id="board">
+          <br/>
+          <h1>{"Connect Four"}</h1>
+          <br/>
           {this.renderCells(this.props.cells)}
-          <button onClick={ ()=>{ this.props.actions.generateCells(7,6)} } >{"Make Cells"}</button>
-          <button onClick={ ()=>{ this.props.actions.setCell(1,2); } } >{"Update Cell"}</button>
+          <br />
+          <br />
+          <button className="button" onClick={ ()=>{ this.props.actions.generateCells(7,6)} } >{"Reset Game"}</button>
         </div>
     )
   }

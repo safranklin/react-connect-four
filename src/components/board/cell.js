@@ -6,7 +6,6 @@ require('./style.less');
 class Cell extends Component {
 
   render() {
-
     let myClassName = "cell";
     switch(this.props.type){
         case 0: myClassName += " cell-empty";
@@ -21,7 +20,6 @@ class Cell extends Component {
     return(
         <div className={myClassName}>
             <p>{this.props.cellId}</p>
-            <p>{this.props.type}</p>
         </div>
     )
   }

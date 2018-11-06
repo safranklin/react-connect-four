@@ -1,9 +1,23 @@
 @import "~themes/variables.less";
 
+h1 {
+    width: auto;
+    color: white;
+}
+
+#board {
+    margin: 0 auto;
+    width: auto;
+    text-align: center;
+}
+
 .cell {
+    text-align: center;
+
     width: 50px;
     height: 50px;
-    display: block;
+    margin: 3px;
+    display: table;
     border: 1px solid white;
     color: white;
 
@@ -21,9 +35,34 @@
     }
 }
 
+.cell p {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.button {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    -moz-box-shadow:    inset 0 0 20px black;
+    -webkit-box-shadow: inset 0 0 20px black;
+    box-shadow:         inset 0 0 20px black;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
 .board-col {
     display: inline-block;
     &:hover {
-        border: 5px solid yellow;
+        -moz-box-shadow:    inset 0 0 20px yellow;
+        -webkit-box-shadow: inset 0 0 20px yellow;
+        box-shadow:         inset 0 0 20px yellow;
+        cursor: pointer;
     }
 }
